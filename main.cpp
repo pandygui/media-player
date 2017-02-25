@@ -20,6 +20,7 @@ int main(int argc, char *argv[])
     MainWidget *widget = new MainWidget();
 
     window.titleBar()->setCustomWidget(titlebar, Qt::AlignVCenter, false);
+    window.setWindowTitle("engine-player");
     window.setCentralWidget(widget);
 
     window.setMinimumSize(700, 500);

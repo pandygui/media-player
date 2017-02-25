@@ -13,6 +13,11 @@ class TitleBar : public QWidget
 
 public:
     TitleBar(QWidget *parent = 0);
+
+    void setTitleText(QString &title);
+
+private:
+    QLabel *m_title;
 };
 
 #endif // TITLEBAR_H

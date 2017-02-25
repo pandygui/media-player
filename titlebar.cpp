@@ -9,9 +9,16 @@ TitleBar::TitleBar(QWidget *parent)
     QLabel *m_icon = new QLabel;
     m_icon->setPixmap(QPixmap(":/resources/icon.svg").scaled(24, 24));
 
-    QLabel *m_title = new QLabel("engine-player");
+    m_title = new QLabel("engine-player");
     m_title->setAlignment(Qt::AlignHCenter);
 
     layout->addWidget(m_icon);
+    layout->addStretch();
     layout->addWidget(m_title);
+    layout->addStretch();
+}
+
+void TitleBar::setTitleText(QString &title)
+{
+    m_title->setText(title);
 }
