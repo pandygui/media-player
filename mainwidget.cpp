@@ -3,12 +3,19 @@
 
 MainWidget::MainWidget(QWidget *parent) : QWidget(parent)
 {
+    m_unit = 1000;
     open_file_name = "";
 
     m_player->setRenderer(renderer);
 
     connect(play_button, SIGNAL(clicked(bool)), this, SLOT(play_button_clicked()));
     connect(stop_button, SIGNAL(clicked(bool)), this, SLOT(stop_button_clicked()));
+
+    connect(play_slider, SIGNAL(sliderMoved(int)), SLOT(seek_by_slider(int)));
+    connect(play_slider, SIGNAL(sliderPressed()), SLOT(seek_by_slider()));
+    connect(m_player, SIGNAL(positionChanged(qint64)), SLOT(update_slider(qint64)));
+    connect(m_player, SIGNAL(started()), SLOT(update_slider()));
+    connect(m_player, SIGNAL(notifyIntervalChanged()), SLOT(update_slider_unit()));
 
     initUI();
 }
@@ -83,4 +90,34 @@ void MainWidget::stop_button_clicked()
 
     m_player->stop();
     play_button->setText("Play");
+}
+
+void MainWidget::seek_by_slider(int value)
+{
+    if (!m_player->isPlaying())
+        return;
+
+    m_player->seek(qint64(value * m_unit));
+}
+
+void MainWidget::seek_by_slider()
+{
+    seek_by_slider(play_slider->value());
+}
+
+void MainWidget::update_slider(qint64 value)
+{
+    play_slider->setRange(0, int(m_player->duration() / m_unit));
+    play_slider->setValue(int(value / m_unit));
+}
+
+void MainWidget::update_slider()
+{
+    update_slider(m_player->position());
+}
+
+void MainWidget::update_slider_unit()
+{
+    m_unit = m_player->notifyInterval();
+    update_slider();
 }
