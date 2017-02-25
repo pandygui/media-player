@@ -1,5 +1,7 @@
 #include "mainwindow.h"
 #include <QFileDialog>
+#include <QPainter>
+#include <QRectF>
 
 MainWindow::MainWindow(QWidget *parent) : DMainWindow(parent)
 {
@@ -71,6 +73,9 @@ void MainWindow::play_button_open_file()
     open_file_name = QFileDialog::getOpenFileName(0, tr("Open a video"));
     QFileInfo file_name = QFileInfo(open_file_name);
 
+    if (open_file_name.isEmpty())
+        return;
+
     m_player->play(open_file_name);
     play_button->setText("Pause");
     time->show();
@@ -131,4 +136,12 @@ void MainWindow::update_slider_unit()
 {
     m_unit = m_player->notifyInterval();
     update_slider();
+}
+
+void MainWindow::paintEvent(QPaintEvent *)
+{
+    QPainter painter(this);
+    painter.setPen(Qt::NoPen);
+    painter.setBrush(QColor("#333333"));
+    painter.drawRect(rect());
 }

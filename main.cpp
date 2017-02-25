@@ -9,16 +9,12 @@ int main(int argc, char *argv[])
     DApplication::loadDXcbPlugin();
 
     DApplication app(argc, argv);
-    app.setTheme("light");
+    app.setTheme("dark");
     app.setWindowIcon(QIcon(":/resources/icon.svg"));
 
     MainWindow window;
-    //TitleBar *titlebar = new TitleBar();
-    //MainWidget *widget = new MainWidget();
 
-    //window.titleBar()->setCustomWidget(titlebar, Qt::AlignVCenter, false);
     window.setWindowTitle("engine-player");
-    //window.setCentralWidget(widget);
 
     window.setMinimumSize(700, 500);
     window.show();

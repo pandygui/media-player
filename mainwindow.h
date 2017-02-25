@@ -6,11 +6,12 @@
 #include <QHBoxLayout>
 #include <QGraphicsView>
 
+#include <DTitlebar>
 #include <dlabel.h>
 #include <dslider.h>
 #include <dtextbutton.h>
+#include <dimagebutton.h>
 #include "titlebar.h"
-#include <DTitlebar>
 
 #include <QtAV>
 #include <QtAVWidgets>
@@ -65,6 +66,9 @@ private:
     DTextButton *play_button = new DTextButton("Play");
     DSlider *sound_slider = new DSlider(Qt::Horizontal);
     DTextButton *full_button = new DTextButton("Full");
+
+protected:
+    void paintEvent(QPaintEvent *);
 };
 
 #endif
