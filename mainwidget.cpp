@@ -31,6 +31,13 @@ void MainWidget::initUI()
     main_layout->addLayout(slider_layout);
     main_layout->addLayout(bottom_layout);
 
+    main_layout->setMargin(0);
+    main_layout->setSpacing(0);
+    bottom_layout->setMargin(10);
+    bottom_layout->setSpacing(10);
+
+    time->hide();
+
     this->setLayout(main_layout);
 }
 
@@ -51,6 +58,7 @@ void MainWidget::play_button_open_file()
     open_file_name = QFileDialog::getOpenFileName(0, tr("Open a video"));
     m_player->play(open_file_name);
     play_button->setText("Pause");
+    time->show();
 }
 
 void MainWidget::play_button_state()
@@ -71,6 +79,7 @@ void MainWidget::play_button_state()
 void MainWidget::stop_button_clicked()
 {
     open_file_name = "";
+    time->hide();
 
     m_player->stop();
     play_button->setText("Play");

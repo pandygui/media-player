@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
     window.setCentralWidget(widget);
 
 
-    window.setMinimumSize(600, 400);
+    window.setMinimumSize(700, 500);
     window.show();
 
     DUtility::moveToCenter(&window);
