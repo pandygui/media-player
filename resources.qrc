@@ -1,11 +1,5 @@
 <RCC>
     <qresource prefix="/">
 	    <file>resources/icon.svg</file>
-        <file>resources/fullscreen_normal.svg</file>
-        <file>resources/fullscreen_hover_press.svg</file>
-        <file>resources/pause_hover_press.svg</file>
-        <file>resources/pause_normal.svg</file>
-        <file>resources/play_hover_press.svg</file>
-        <file>resources/play_normal.svg</file>
     </qresource>
 </RCC>
