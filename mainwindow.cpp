@@ -29,11 +29,13 @@ void MainWindow::initUI()
     sound_slider->setFixedWidth(100);
 
     bottom_layout->addWidget(time);
+    bottom_layout->addStretch();
     bottom_layout->addWidget(stop_button);
     bottom_layout->addWidget(left_button);
     bottom_layout->addWidget(play_button);
     bottom_layout->addWidget(right_button);
     bottom_layout->addWidget(sound_slider);
+    bottom_layout->addStretch();
     bottom_layout->addWidget(full_button);
 
     slider_layout->addWidget(play_slider);
