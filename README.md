@@ -14,7 +14,7 @@ A simple player for you.
 
 * qt5core
 
-* [dtkbase and dtkwidget](https://github.com/linuxdeepin/deepin-tool-kit)
+* [deepin-tool-kit](https://github.com/linuxdeepin/deepin-tool-kit)
 
 * [libqtavwidgets](https://github.com/wang-bin/QtAV)
 

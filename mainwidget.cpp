@@ -3,10 +3,19 @@
 
 MainWidget::MainWidget(QWidget *parent) : QWidget(parent)
 {
-
     open_file_name = "";
 
     m_player->setRenderer(renderer);
+
+    connect(play_button, SIGNAL(clicked(bool)), this, SLOT(play_button_clicked()));
+    connect(stop_button, SIGNAL(clicked(bool)), this, SLOT(stop_button_clicked()));
+
+    initUI();
+}
+
+void MainWidget::initUI()
+{
+    sound_slider->setFixedWidth(100);
 
     bottom_layout->addWidget(time);
     bottom_layout->addWidget(stop_button);
@@ -23,16 +32,6 @@ MainWidget::MainWidget(QWidget *parent) : QWidget(parent)
     main_layout->addLayout(bottom_layout);
 
     this->setLayout(main_layout);
-
-    connect(play_button, SIGNAL(clicked(bool)), this, SLOT(play_button_clicked()));
-    connect(stop_button, SIGNAL(clicked(bool)), this, SLOT(stop_button_clicked()));
-
-    initUI();
-}
-
-void MainWidget::initUI()
-{
-    sound_slider->setFixedWidth(100);
 }
 
 void MainWidget::play_button_clicked()

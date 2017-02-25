@@ -12,5 +12,4 @@ PKGCONFIG += dtkwidget dtkbase
 
 HEADERS +=  mainwidget.h
 
-SOURCES +=  main.cpp
-            mainwidget.cpp
+SOURCES +=  main.cpp mainwidget.cpp
