@@ -1,7 +1,7 @@
-#ifndef MAINWIDGET_H
-#define MAINWIDGET_H
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
 
-#include <QWidget>
+#include <DMainWindow>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QGraphicsView>
@@ -9,6 +9,8 @@
 #include <dlabel.h>
 #include <dslider.h>
 #include <dtextbutton.h>
+#include "titlebar.h"
+#include <DTitlebar>
 
 #include <QtAV>
 #include <QtAVWidgets>
@@ -18,12 +20,12 @@ DWIDGET_USE_NAMESPACE
 
 using namespace QtAV;
 
-class MainWidget : public QWidget
+class MainWindow : public DMainWindow
 {
     Q_OBJECT
 
 public:
-    MainWidget(QWidget *parent = 0);
+    MainWindow(QWidget *parent = 0);
 
     void initUI();
 
@@ -45,6 +47,8 @@ private slots:
     void update_slider_unit();
 
 private:
+    QWidget *widget = new QWidget();
+    TitleBar *titlebar = new TitleBar();
     QVBoxLayout *main_layout = new QVBoxLayout();
     QHBoxLayout *slider_layout = new QHBoxLayout();
     QHBoxLayout *bottom_layout = new QHBoxLayout();

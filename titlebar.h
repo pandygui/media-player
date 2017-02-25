@@ -14,10 +14,12 @@ class TitleBar : public QWidget
 public:
     TitleBar(QWidget *parent = 0);
 
-    void setTitleText(QString &title);
+    void setTitleText(const QString &title);
+    void setFileName(const QString &name);
 
 private:
-    QLabel *m_title;
+    DLabel *m_title;
+    DLabel *m_file_name;
 };
 
 #endif // TITLEBAR_H

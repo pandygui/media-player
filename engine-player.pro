@@ -10,8 +10,10 @@ CONFIG += link_pkgconfig
 CONFIG += c++11
 PKGCONFIG += dtkwidget dtkbase
 
-HEADERS +=  mainwidget.h titlebar.h
+HEADERS +=  titlebar.h \
+    mainwindow.h
 
-SOURCES +=  main.cpp mainwidget.cpp titlebar.cpp
+SOURCES +=  main.cpp titlebar.cpp \
+    mainwindow.cpp
 
 RESOURCES += resources.qrc

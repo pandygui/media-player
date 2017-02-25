@@ -9,16 +9,25 @@ TitleBar::TitleBar(QWidget *parent)
     QLabel *m_icon = new QLabel;
     m_icon->setPixmap(QPixmap(":/resources/icon.svg").scaled(24, 24));
 
-    m_title = new QLabel("engine-player");
-    m_title->setAlignment(Qt::AlignHCenter);
+    m_title = new DLabel("engine-player");
+
+    m_file_name = new DLabel("");
+
+    layout->setMargin(0);
 
     layout->addWidget(m_icon);
-    layout->addStretch();
     layout->addWidget(m_title);
+    layout->addStretch();
+    layout->addWidget(m_file_name);
     layout->addStretch();
 }
 
-void TitleBar::setTitleText(QString &title)
+void TitleBar::setTitleText(const QString &title)
 {
     m_title->setText(title);
+}
+
+void TitleBar::setFileName(const QString &name)
+{
+    m_file_name->setText(name);
 }

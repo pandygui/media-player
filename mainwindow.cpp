@@ -1,7 +1,7 @@
-#include "mainwidget.h"
+#include "mainwindow.h"
 #include <QFileDialog>
 
-MainWidget::MainWidget(QWidget *parent) : QWidget(parent)
+MainWindow::MainWindow(QWidget *parent) : DMainWindow(parent)
 {
     m_unit = 1000;
     open_file_name = "";
@@ -20,8 +20,12 @@ MainWidget::MainWidget(QWidget *parent) : QWidget(parent)
     initUI();
 }
 
-void MainWidget::initUI()
+void MainWindow::initUI()
 {
+    titlebar->setFileName("");
+    this->titleBar()->setCustomWidget(titlebar, Qt::AlignVCenter, false);
+    this->setCentralWidget(widget);
+
     sound_slider->setFixedWidth(100);
 
     bottom_layout->addWidget(time);
@@ -45,10 +49,10 @@ void MainWidget::initUI()
 
     time->hide();
 
-    this->setLayout(main_layout);
+    widget->setLayout(main_layout);
 }
 
-void MainWidget::play_button_clicked()
+void MainWindow::play_button_clicked()
 {
     if (open_file_name.isEmpty())
     {
@@ -60,15 +64,19 @@ void MainWidget::play_button_clicked()
     }
 }
 
-void MainWidget::play_button_open_file()
+void MainWindow::play_button_open_file()
 {
     open_file_name = QFileDialog::getOpenFileName(0, tr("Open a video"));
+    QFileInfo file_name = QFileInfo(open_file_name);
+
     m_player->play(open_file_name);
     play_button->setText("Pause");
     time->show();
+
+    titlebar->setFileName(file_name.fileName());
 }
 
-void MainWidget::play_button_state()
+void MainWindow::play_button_state()
 {
     if (m_player->state() == m_player->PlayingState)
     {
@@ -83,16 +91,17 @@ void MainWidget::play_button_state()
 
 }
 
-void MainWidget::stop_button_clicked()
+void MainWindow::stop_button_clicked()
 {
     open_file_name = "";
     time->hide();
 
     m_player->stop();
     play_button->setText("Play");
+    titlebar->setFileName("");
 }
 
-void MainWidget::seek_by_slider(int value)
+void MainWindow::seek_by_slider(int value)
 {
     if (!m_player->isPlaying())
         return;
@@ -100,23 +109,23 @@ void MainWidget::seek_by_slider(int value)
     m_player->seek(qint64(value * m_unit));
 }
 
-void MainWidget::seek_by_slider()
+void MainWindow::seek_by_slider()
 {
     seek_by_slider(play_slider->value());
 }
 
-void MainWidget::update_slider(qint64 value)
+void MainWindow::update_slider(qint64 value)
 {
     play_slider->setRange(0, int(m_player->duration() / m_unit));
     play_slider->setValue(int(value / m_unit));
 }
 
-void MainWidget::update_slider()
+void MainWindow::update_slider()
 {
     update_slider(m_player->position());
 }
 
-void MainWidget::update_slider_unit()
+void MainWindow::update_slider_unit()
 {
     m_unit = m_player->notifyInterval();
     update_slider();
