@@ -65,7 +65,7 @@ private:
     DTextButton *right_button = new DTextButton("→");
     DTextButton *play_button = new DTextButton("Play");
     DSlider *sound_slider = new DSlider(Qt::Horizontal);
-    DTextButton *full_button = new DTextButton("Full");
+    DTextButton *full_button = new DTextButton("FullScreen");
 
 protected:
     void paintEvent(QPaintEvent *);

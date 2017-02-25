@@ -46,8 +46,8 @@ void MainWindow::initUI()
     main_layout->addLayout(slider_layout);
     main_layout->addLayout(bottom_layout);
 
-    main_layout->setMargin(0);
-    main_layout->setSpacing(0);
+    main_layout->setMargin(5);
+    main_layout->setSpacing(5);
     bottom_layout->setMargin(10);
     bottom_layout->setSpacing(10);
 
