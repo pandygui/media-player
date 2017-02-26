@@ -46,6 +46,7 @@ private slots:
     void update_slider(qint64 value);
     void update_slider();
     void update_slider_unit();
+    void move_sound_slider();
 
 private:
     QWidget *widget = new QWidget();

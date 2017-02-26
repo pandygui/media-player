@@ -22,6 +22,9 @@ MainWindow::MainWindow(QWidget *parent) : DMainWindow(parent)
     connect(m_player, SIGNAL(started()), SLOT(update_slider()));
     connect(m_player, SIGNAL(notifyIntervalChanged()), SLOT(update_slider_unit()));
 
+    connect(sound_slider, SIGNAL(sliderMoved(int)), this, SLOT(move_sound_slider()));
+    connect(sound_slider, SIGNAL(sliderPressed()), this, SLOT(move_sound_slider()));
+
     initUI();
 }
 
@@ -34,7 +37,7 @@ void MainWindow::initUI()
     QAction *exitAction = m_menu->addAction("Exit");
 
     connect(openAction, &QAction::triggered, this, [=]{
-           play_button_open_file();
+           play_button_clicked();
     });
 
     connect(exitAction, &QAction::triggered, this, [=]{
@@ -48,6 +51,7 @@ void MainWindow::initUI()
 
     sound_slider->setFixedWidth(100);
 
+    bottom_layout->addSpacing(10);
     bottom_layout->addWidget(time);
     bottom_layout->addStretch();
     bottom_layout->addWidget(stop_button);
@@ -82,6 +86,7 @@ void MainWindow::initUI()
     play_button->setIconSize(QSize(32, 32));
 
     time->hide();
+    sound_slider->setValue(100);
 
     widget->setLayout(main_layout);
 }
@@ -123,6 +128,11 @@ void MainWindow::play_button_state()
     else if (m_player->state() == m_player->PausedState)
     {
         m_player->pause(false);
+        play_button->setIcon(QIcon(":/resources/disabled_pause.svg"));
+    }
+    else if (m_player->state() == m_player->StoppedState)
+    {
+        m_player->play();
         play_button->setIcon(QIcon(":/resources/disabled_pause.svg"));
     }
 
@@ -169,10 +179,15 @@ void MainWindow::update_slider_unit()
     update_slider();
 }
 
+void MainWindow::move_sound_slider()
+{
+    m_player->audio()->setVolume(sound_slider->value() / 100.0);
+}
+
 void MainWindow::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
     painter.setPen(Qt::NoPen);
-    painter.setBrush(QColor("#262728"));
+    painter.setBrush(QColor("#333333"));
     painter.drawRect(rect());
 }
