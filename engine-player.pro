@@ -11,9 +11,11 @@ CONFIG += c++11
 PKGCONFIG += dtkwidget dtkbase
 
 HEADERS +=  titlebar.h \
-    mainwindow.h
+    mainwindow.h \
+    dbutton.h
 
 SOURCES +=  main.cpp titlebar.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    dbutton.cpp
 
 RESOURCES += resources.qrc

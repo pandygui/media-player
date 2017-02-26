@@ -9,9 +9,9 @@
 #include <DTitlebar>
 #include <dlabel.h>
 #include <dslider.h>
-#include <dtextbutton.h>
 #include <dimagebutton.h>
 #include "titlebar.h"
+#include "dbutton.h"
 
 #include <QtAV>
 #include <QtAVWidgets>
@@ -60,12 +60,12 @@ private:
 
     DSlider *play_slider = new DSlider(Qt::Horizontal);
     DLabel *time = new DLabel("00:00:00/00:00:00");
-    DTextButton *stop_button = new DTextButton("Stop");
-    DTextButton *left_button = new DTextButton("←");
-    DTextButton *right_button = new DTextButton("→");
-    DTextButton *play_button = new DTextButton("Play");
+    DButton *stop_button = new DButton();
+    DButton *left_button = new DButton();
+    DButton *right_button = new DButton();
+    DButton *play_button = new DButton();
     DSlider *sound_slider = new DSlider(Qt::Horizontal);
-    DTextButton *full_button = new DTextButton("FullScreen");
+    DButton *full_button = new DButton();
 
     DMenu *m_menu;
 

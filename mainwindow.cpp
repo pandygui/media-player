@@ -30,6 +30,7 @@ void MainWindow::initUI()
     m_menu = new DMenu(this);
     QAction *openAction = m_menu->addAction("Open");
     QAction *fullAction = m_menu->addAction("Full screen");
+    QAction *aboutAction = m_menu->addAction("About");
     QAction *exitAction = m_menu->addAction("Exit");
 
     connect(openAction, &QAction::triggered, this, [=]{
@@ -50,9 +51,13 @@ void MainWindow::initUI()
     bottom_layout->addWidget(time);
     bottom_layout->addStretch();
     bottom_layout->addWidget(stop_button);
+    bottom_layout->addSpacing(15);
     bottom_layout->addWidget(left_button);
+    bottom_layout->addSpacing(15);
     bottom_layout->addWidget(play_button);
+    bottom_layout->addSpacing(15);
     bottom_layout->addWidget(right_button);
+    bottom_layout->addSpacing(15);
     bottom_layout->addWidget(sound_slider);
     bottom_layout->addStretch();
     bottom_layout->addWidget(full_button);
@@ -63,10 +68,18 @@ void MainWindow::initUI()
     main_layout->addLayout(slider_layout);
     main_layout->addLayout(bottom_layout);
 
-    main_layout->setMargin(5);
-    main_layout->setSpacing(5);
+    main_layout->setMargin(1);
+    main_layout->setSpacing(1);
     bottom_layout->setMargin(10);
-    bottom_layout->setSpacing(10);
+    bottom_layout->setSpacing(5);
+
+    play_button->setIcon(QIcon(":/resources/disabled_play.svg"));
+    stop_button->setIcon(QIcon(":/resources/stop_normal.svg"));
+    left_button->setIcon(QIcon(":/resources/disabled_previous.svg"));
+    right_button->setIcon(QIcon(":/resources/disabled_next.svg"));
+    full_button->setIcon(QIcon(":/resources/fullscreen_normal.svg"));
+
+    play_button->setIconSize(QSize(32, 32));
 
     time->hide();
 
@@ -94,7 +107,7 @@ void MainWindow::play_button_open_file()
         return;
 
     m_player->play(open_file_name);
-    play_button->setText("Pause");
+    play_button->setIcon(QIcon(":/resources/disabled_pause.svg"));
     time->show();
 
     titlebar->setFileName(file_name.fileName());
@@ -105,12 +118,12 @@ void MainWindow::play_button_state()
     if (m_player->state() == m_player->PlayingState)
     {
         m_player->pause(true);
-        play_button->setText("Play");
+        play_button->setIcon(QIcon(":/resources/disabled_play.svg"));
     }
     else if (m_player->state() == m_player->PausedState)
     {
         m_player->pause(false);
-        play_button->setText("Pause");
+        play_button->setIcon(QIcon(":/resources/disabled_pause.svg"));
     }
 
 }
@@ -121,8 +134,9 @@ void MainWindow::stop_button_clicked()
     time->hide();
 
     m_player->stop();
-    play_button->setText("Play");
+    play_button->setIcon(QIcon(":/resources/disabled_play.svg"));
     titlebar->setFileName("");
+    play_slider->setValue(0);
 }
 
 void MainWindow::seek_by_slider(int value)
@@ -159,6 +173,6 @@ void MainWindow::paintEvent(QPaintEvent *)
 {
     QPainter painter(this);
     painter.setPen(Qt::NoPen);
-    painter.setBrush(QColor("#333333"));
+    painter.setBrush(QColor("#262728"));
     painter.drawRect(rect());
 }
