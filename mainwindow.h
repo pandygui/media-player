@@ -4,7 +4,7 @@
 #include <DMainWindow>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
-#include <QGraphicsView>
+#include <dmenu.h>
 
 #include <DTitlebar>
 #include <dlabel.h>
@@ -66,6 +66,8 @@ private:
     DTextButton *play_button = new DTextButton("Play");
     DSlider *sound_slider = new DSlider(Qt::Horizontal);
     DTextButton *full_button = new DTextButton("FullScreen");
+
+    DMenu *m_menu;
 
 protected:
     void paintEvent(QPaintEvent *);

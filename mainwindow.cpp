@@ -2,6 +2,9 @@
 #include <QFileDialog>
 #include <QPainter>
 #include <QRectF>
+#include <QStyleFactory>
+#include <QAction>
+#include <QApplication>
 
 MainWindow::MainWindow(QWidget *parent) : DMainWindow(parent)
 {
@@ -24,8 +27,22 @@ MainWindow::MainWindow(QWidget *parent) : DMainWindow(parent)
 
 void MainWindow::initUI()
 {
+    m_menu = new DMenu(this);
+    QAction *openAction = m_menu->addAction("Open");
+    QAction *fullAction = m_menu->addAction("Full screen");
+    QAction *exitAction = m_menu->addAction("Exit");
+
+    connect(openAction, &QAction::triggered, this, [=]{
+           play_button_open_file();
+    });
+
+    connect(exitAction, &QAction::triggered, this, [=]{
+            qApp->quit();
+    });
+
     titlebar->setFileName("");
     this->titleBar()->setCustomWidget(titlebar, Qt::AlignVCenter, false);
+    this->titleBar()->setMenu(m_menu);
     this->setCentralWidget(widget);
 
     sound_slider->setFixedWidth(100);
