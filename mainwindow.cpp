@@ -46,7 +46,7 @@ void MainWindow::initUI()
     QAction *exitAction = m_menu->addAction("Exit");
 
     connect(openAction, &QAction::triggered, this, [=]{
-           play_button_open_file();
+            play_button_open_file();
     });
 
     connect(exitAction, &QAction::triggered, this, [=]{
@@ -215,10 +215,12 @@ void MainWindow::move_sound_slider()
     if (sound_slider->value() == 0)
     {
         sound_button->setIcon(QIcon(":/resources/default_mute.svg"));
+        sound_state = false;
     }
     else
     {
         sound_button->setIcon(QIcon(":/resources/default_unmute.svg"));
+        sound_state = true;
     }
 
     m_player->audio()->setVolume(sound_slider->value() / 100.0);
