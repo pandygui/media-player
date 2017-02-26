@@ -37,7 +37,7 @@ void MainWindow::initUI()
     QAction *exitAction = m_menu->addAction("Exit");
 
     connect(openAction, &QAction::triggered, this, [=]{
-           play_button_clicked();
+           play_button_open_file();
     });
 
     connect(exitAction, &QAction::triggered, this, [=]{
