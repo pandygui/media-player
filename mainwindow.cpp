@@ -14,7 +14,8 @@ MainWindow::MainWindow(QWidget *parent) : DMainWindow(parent)
     m_player->setRenderer(renderer);
 
     connect(play_button, SIGNAL(clicked(bool)), this, SLOT(play_button_clicked()));
-    connect(play_button, SIGNAL(clicked(bool)), this, SLOT(play_button_clicked()));
+    connect(stop_button, SIGNAL(clicked(bool)), this, SLOT(stop_button_clicked()));
+
     connect(left_button, &DButton::clicked, this, [=]{
         m_player->seekBackward();
     });
