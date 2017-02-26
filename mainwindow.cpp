@@ -8,6 +8,7 @@
 
 MainWindow::MainWindow(QWidget *parent) : DMainWindow(parent)
 {
+    sound_state = true;
     m_unit = 1000;
     open_file_name = "";
 
@@ -15,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent) : DMainWindow(parent)
 
     connect(play_button, SIGNAL(clicked(bool)), this, SLOT(play_button_clicked()));
     connect(stop_button, SIGNAL(clicked(bool)), this, SLOT(stop_button_clicked()));
+    connect(sound_button, SIGNAL(clicked(bool)), this, SLOT(sound_button_clicked()));
 
     connect(left_button, &DButton::clicked, this, [=]{
         m_player->seekBackward();
@@ -54,6 +56,7 @@ void MainWindow::initUI()
     titlebar->setFileName("");
     this->titleBar()->setCustomWidget(titlebar, Qt::AlignVCenter, false);
     this->titleBar()->setMenu(m_menu);
+    this->titleBar()->setFixedHeight(35);
     this->setCentralWidget(widget);
 
     sound_slider->setFixedWidth(100);
@@ -69,6 +72,7 @@ void MainWindow::initUI()
     bottom_layout->addSpacing(15);
     bottom_layout->addWidget(right_button);
     bottom_layout->addSpacing(15);
+    bottom_layout->addWidget(sound_button);
     bottom_layout->addWidget(sound_slider);
     bottom_layout->addStretch();
     bottom_layout->addWidget(full_button);
@@ -89,8 +93,10 @@ void MainWindow::initUI()
     left_button->setIcon(QIcon(":/resources/disabled_previous.svg"));
     right_button->setIcon(QIcon(":/resources/disabled_next.svg"));
     full_button->setIcon(QIcon(":/resources/fullscreen_normal.svg"));
+    sound_button->setIcon(QIcon(":/resources/default_unmute.svg"));
 
     play_button->setIconSize(QSize(32, 32));
+    sound_button->setIconSize(QSize(20, 20));
 
     time->hide();
     sound_slider->setValue(100);
@@ -145,6 +151,24 @@ void MainWindow::play_button_state()
 
 }
 
+void MainWindow::sound_button_clicked()
+{
+    if (sound_state)
+    {
+        sound_button->setIcon(QIcon(":/resources/default_mute.svg"));
+        sound_slider->setValue(0);
+        m_player->audio()->setVolume(0);
+        sound_state = false;
+    }
+    else
+    {
+        sound_button->setIcon(QIcon(":/resources/default_unmute.svg"));
+        sound_slider->setValue(100);
+        m_player->audio()->setVolume(sound_slider->value() / 100.0);
+        sound_state = true;
+    }
+}
+
 void MainWindow::stop_button_clicked()
 {
     open_file_name = "";
@@ -188,6 +212,15 @@ void MainWindow::update_slider_unit()
 
 void MainWindow::move_sound_slider()
 {
+    if (sound_slider->value() == 0)
+    {
+        sound_button->setIcon(QIcon(":/resources/default_mute.svg"));
+    }
+    else
+    {
+        sound_button->setIcon(QIcon(":/resources/default_unmute.svg"));
+    }
+
     m_player->audio()->setVolume(sound_slider->value() / 100.0);
 }
 

@@ -33,12 +33,14 @@ public:
 private:
     QString open_file_name;
     int m_unit;
+    bool sound_state;
 
 private slots:
     void play_button_clicked();
     void play_button_open_file();
     void play_button_state();
     void stop_button_clicked();
+    void sound_button_clicked();
 
     void seek_by_slider(int value);
     void seek_by_slider();
@@ -65,6 +67,7 @@ private:
     DButton *left_button = new DButton();
     DButton *right_button = new DButton();
     DButton *play_button = new DButton();
+    DButton *sound_button = new DButton();
     DSlider *sound_slider = new DSlider(Qt::Horizontal);
     DButton *full_button = new DButton();
 
