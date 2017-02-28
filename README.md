@@ -1,4 +1,4 @@
-## engine-player
+## Engine Media Player
 
 A simple player for you.
 
