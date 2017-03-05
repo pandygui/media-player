@@ -4,7 +4,7 @@
 #include <DMainWindow>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
-#include <dmenu.h>
+#include <QMenu>
 
 #include <DTitlebar>
 #include <dlabel.h>
@@ -49,6 +49,7 @@ private slots:
     void update_slider();
     void update_slider_unit();
     void move_sound_slider();
+    void player_started();
 
 private:
     QWidget *widget = new QWidget();
@@ -71,7 +72,7 @@ private:
     DSlider *sound_slider = new DSlider(Qt::Horizontal);
     DButton *full_button = new DButton();
 
-    DMenu *m_menu;
+    QMenu *m_menu;
 
 protected:
     void paintEvent(QPaintEvent *);

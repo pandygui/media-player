@@ -8,7 +8,7 @@ TARGET = engine-player
 
 CONFIG += link_pkgconfig
 CONFIG += c++11
-PKGCONFIG += dtkwidget dtkbase
+PKGCONFIG += dtkbase dtkwidget dtkutil
 
 HEADERS +=  titlebar.h \
     mainwindow.h \

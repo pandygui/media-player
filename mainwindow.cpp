@@ -30,6 +30,7 @@ MainWindow::MainWindow(QWidget *parent) : DMainWindow(parent)
     connect(m_player, SIGNAL(positionChanged(qint64)), SLOT(update_slider(qint64)));
     connect(m_player, SIGNAL(started()), SLOT(update_slider()));
     connect(m_player, SIGNAL(notifyIntervalChanged()), SLOT(update_slider_unit()));
+    connect(m_player, SIGNAL(started()), SLOT(player_started()));
 
     connect(sound_slider, SIGNAL(sliderMoved(int)), this, SLOT(move_sound_slider()));
     connect(sound_slider, SIGNAL(sliderPressed()), this, SLOT(move_sound_slider()));
@@ -39,7 +40,7 @@ MainWindow::MainWindow(QWidget *parent) : DMainWindow(parent)
 
 void MainWindow::initUI()
 {
-    m_menu = new DMenu(this);
+    m_menu = new QMenu(this);
     QAction *openAction = m_menu->addAction("Open");
     QAction *fullAction = m_menu->addAction("Full screen");
     QAction *aboutAction = m_menu->addAction("About");
@@ -119,7 +120,6 @@ void MainWindow::play_button_clicked()
 void MainWindow::play_button_open_file()
 {
     open_file_name = QFileDialog::getOpenFileName(0, tr("Open a video"));
-    QFileInfo file_name = QFileInfo(open_file_name);
 
     if (open_file_name.isEmpty())
         return;
@@ -128,7 +128,7 @@ void MainWindow::play_button_open_file()
     play_button->setIcon(QIcon(":/resources/disabled_pause.svg"));
     time->show();
 
-    titlebar->setFileName(file_name.fileName());
+    titlebar->setFileName(QFileInfo(open_file_name).fileName());
 }
 
 void MainWindow::play_button_state()
@@ -224,6 +224,11 @@ void MainWindow::move_sound_slider()
     }
 
     m_player->audio()->setVolume(sound_slider->value() / 100.0);
+}
+
+void MainWindow::player_started()
+{
+
 }
 
 void MainWindow::paintEvent(QPaintEvent *)
