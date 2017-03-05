@@ -18,6 +18,8 @@ A simple player for you.
 
 * [libqtavwidgets](https://github.com/wang-bin/QtAV)
 
+`sudo apt install libqt5core5a libqt5gui5 libqt5widgets5 libqtavwidgets`
+
 ## License
 
 Engine Player is licensed under [GPLv3](LICENSE).
