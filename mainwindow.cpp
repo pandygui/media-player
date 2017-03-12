@@ -54,6 +54,8 @@ void MainWindow::initUI()
             qApp->quit();
     });
 
+    connect(aboutAction, &QAction::triggered, this, &MainWindow::showAboutDialog);
+
     titlebar->setFileName("");
     this->titleBar()->setCustomWidget(titlebar, Qt::AlignVCenter, false);
     this->titleBar()->setMenu(m_menu);
@@ -119,7 +121,12 @@ void MainWindow::play_button_clicked()
 
 void MainWindow::play_button_open_file()
 {
-    open_file_name = QFileDialog::getOpenFileName(0, tr("Open a video"));
+    QString new_file_name = QFileDialog::getOpenFileName(0, tr("Open a video"));
+
+    if (new_file_name.isEmpty())
+        return;
+
+    open_file_name = new_file_name;
 
     if (open_file_name.isEmpty())
         return;
@@ -229,6 +236,20 @@ void MainWindow::move_sound_slider()
 void MainWindow::player_started()
 {
 
+}
+
+void MainWindow::showAboutDialog()
+{
+    QString descriptionText = tr("Simple, easy to use, nice player.");
+
+    auto *aboutDlg = new Dtk::Widget::DAboutDialog();
+    aboutDlg->setWindowModality(Qt::WindowModal);
+    aboutDlg->setWindowIcon(QPixmap::fromImage(QImage(":/resources/icon.svg")));
+    aboutDlg->setProductIcon(QPixmap::fromImage(QImage(":/resources/icon.svg")));
+    aboutDlg->setProductName(tr("Engine Player"));
+    aboutDlg->setVersion(QString("%1: 1.0").arg(tr("Version")));
+    aboutDlg->setDescription(descriptionText + "\n");
+    aboutDlg->show();
 }
 
 void MainWindow::paintEvent(QPaintEvent *)

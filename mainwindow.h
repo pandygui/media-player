@@ -10,6 +10,7 @@
 #include <dlabel.h>
 #include <dslider.h>
 #include <dimagebutton.h>
+#include <daboutdialog.h>
 #include "titlebar.h"
 #include "dbutton.h"
 
@@ -34,6 +35,9 @@ private:
     QString open_file_name;
     int m_unit;
     bool sound_state;
+
+public slots:
+    void showAboutDialog();
 
 private slots:
     void play_button_clicked();
