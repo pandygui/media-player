@@ -1,10 +1,10 @@
-## Engine Media Player
+## Rekols Media Player
 
 A simple player for you.
 
 ### Build dependencies
 
-`sudo apt install libdtkbase-dev libdtkwidget-dev libdtkutil-dev qtav-dev`
+`sudo apt install libdtkcore-dev libdtkwidget-dev qtav-dev`
 
 ### Runtime dependencies
 
@@ -22,5 +22,5 @@ A simple player for you.
 
 ## License
 
-Engine Player is licensed under [GPLv3](LICENSE).
+Rekols Player is licensed under [GPLv3](LICENSE).
 

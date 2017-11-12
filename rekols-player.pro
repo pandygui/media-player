@@ -4,11 +4,11 @@ QT += gui
 QT += avwidgets
 
 TEMPLATE = app
-TARGET = engine-player
+TARGET = rekols-player
 
 CONFIG += link_pkgconfig
 CONFIG += c++11
-PKGCONFIG += dtkbase dtkwidget dtkutil
+PKGCONFIG += dtkwidget
 
 HEADERS +=  titlebar.h \
     mainwindow.h \

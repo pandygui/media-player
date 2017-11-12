@@ -1,5 +1,4 @@
 #include <DApplication>
-#include <dutility.h>
 #include "mainwindow.h"
 
 DWIDGET_USE_NAMESPACE
@@ -14,12 +13,10 @@ int main(int argc, char *argv[])
 
     MainWindow window;
 
-    window.setWindowTitle("engine-player");
+    window.setWindowTitle("rekols-player");
 
     window.setMinimumSize(700, 500);
     window.show();
-
-    DUtility::moveToCenter(&window);
 
     return app.exec();
 }

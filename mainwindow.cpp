@@ -5,6 +5,7 @@
 #include <QStyleFactory>
 #include <QAction>
 #include <QApplication>
+#include <dtitlebar.h>
 
 MainWindow::MainWindow(QWidget *parent) : DMainWindow(parent)
 {
@@ -56,11 +57,10 @@ void MainWindow::initUI()
 
     connect(aboutAction, &QAction::triggered, this, &MainWindow::showAboutDialog);
 
-    titlebar->setFileName("");
-    this->titleBar()->setCustomWidget(titlebar, Qt::AlignVCenter, false);
-    this->titleBar()->setMenu(m_menu);
-    this->titleBar()->setFixedHeight(35);
-    this->setCentralWidget(widget);
+    tb->setFileName("");
+    titlebar()->setCustomWidget(tb, Qt::AlignVCenter, false);
+    titlebar()->setMenu(m_menu);
+    setCentralWidget(widget);
 
     sound_slider->setFixedWidth(100);
 
@@ -135,7 +135,7 @@ void MainWindow::play_button_open_file()
     play_button->setIcon(QIcon(":/resources/disabled_pause.svg"));
     time->show();
 
-    titlebar->setFileName(QFileInfo(open_file_name).fileName());
+    tb->setFileName(QFileInfo(open_file_name).fileName());
 }
 
 void MainWindow::play_button_state()
@@ -183,7 +183,7 @@ void MainWindow::stop_button_clicked()
 
     m_player->stop();
     play_button->setIcon(QIcon(":/resources/disabled_play.svg"));
-    titlebar->setFileName("");
+    tb->setFileName("");
     play_slider->setValue(0);
 }
 

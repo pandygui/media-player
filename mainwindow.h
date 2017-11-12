@@ -6,7 +6,6 @@
 #include <QHBoxLayout>
 #include <QMenu>
 
-#include <DTitlebar>
 #include <dlabel.h>
 #include <dslider.h>
 #include <dimagebutton.h>
@@ -57,7 +56,7 @@ private slots:
 
 private:
     QWidget *widget = new QWidget();
-    TitleBar *titlebar = new TitleBar();
+    TitleBar *tb = new TitleBar();
     QVBoxLayout *main_layout = new QVBoxLayout();
     QHBoxLayout *slider_layout = new QHBoxLayout();
     QHBoxLayout *bottom_layout = new QHBoxLayout();
